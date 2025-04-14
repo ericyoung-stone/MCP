@@ -38,11 +38,40 @@ uv add mcp
 uv run client.py
 ```
 
-### 5. MCP客户端接入OpenAI
+### 5. MCP客户端接入OpenAI在线大模型流程
 #### (1)安装库
 ```bash
 uv add mcp openai python-dotenv
 ```
 
 #### (2)创建.env文件
+BASE_URL=https://api.deepseek.com
+MODEL=deepseek-chat      
+OPENAI_API_KEY="DeepSeek API-Key"
 
+#### (3) 修改client.py代码, 引入大模型 -> clint-llm.py
+- messages：创建对话上下文，让 OpenAI 知道如何回答问题：
+  - system 角色：设定 AI 角色（如“你是一个智能助手”）。
+  - user 角色：存储用户输入。
+- openai.ChatCompletion.create(...)
+  - model="gpt-4"：使用 OpenAI 的 GPT-4 进行对话。
+  - messages=messages：提供聊天记录，让 AI 生成回答。
+  - max_tokens=1000：限制 AI 生成的最大字数。
+  - temperature=0.7：控制 AI 回答的随机性（越高越随机）。
+- **run_in_executor(...)：**
+  - 因为 OpenAI API 是同步的，但我们用的是异步代码
+  - 这里用 **asyncio.get_event_loop().run_in_executor(...)** 将 OpenAI API 变成异步任务，防止程序卡顿。
+
+### 6. MCP客户端接入本地ollama、vLLM模型流程
+- 接下来，我们继续尝试将ollama、vLLM等模型调度框架接入MCP的client。
+- 由于ollama和vLLM均支持OpenAI API风格调用方法，因此上述client.py并不需要进行任何修改，
+- 我们只需要启动响应的调度框架服务，然后修改.env文件即可。
+
+#### (1)MCP客户端接入本地ollama
+- ollama start
+- ollama list
+- ollama run PetrosStav/gemma3-tools:4b
+- 修改.env
+  BASE_URL=http://localhost:11434/v1/
+  MODEL=PetrosStav/gemma3-tools:4b 
+  OPENAI_API_KEY=ollama
