@@ -1,4 +1,4 @@
-## 创建MCP客户端
+## 一 创建MCP客户端
 ### 1. 创建项目目录
 ```bash
 uv init mcp-client
@@ -76,7 +76,7 @@ OPENAI_API_KEY="DeepSeek API-Key"
   MODEL=PetrosStav/gemma3-tools:4b 
   OPENAI_API_KEY=ollama
 
-## MCP天气查询服务器server与使用
+## 二. MCP天气查询服务器server与使用
 1. MCP服务器概念介绍
         根据MCP协议定义，Server可以提供三种类型的标准能力，Resources、Tools、Prompts，每个Server可同时提供者三种类型能力或其中一种。
 - **Resources：**资源，类似于文件数据读取，可以是文件资源或是API响应返回的内容。
