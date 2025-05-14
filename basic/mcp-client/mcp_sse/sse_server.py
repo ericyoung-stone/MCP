@@ -16,7 +16,7 @@ async def fetch_website(url: str):
         url='https://'+url
     async with httpx.AsyncClient(follow_redirects=True) as client:
         response=await client.get(url)
-        if response.status_code!=200:
+        if response.status_code != 200:
             return f'Error fetching {url}: {response.status_code}'
         return response.text
 

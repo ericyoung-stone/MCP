@@ -16,3 +16,8 @@ npx -y @modelcontextprotocol/inspector uv run server_weather.py
 ## (2)30行代码实现 MCP SSE
 参考:https://www.bilibili.com/video/BV1PYdBYcEg9/?spm_id_from=333.788.top_right_bar_window_custom_collection.content.click&vd_source=543b2dcf5d331a68c9841120068cfd8b
 代码:https://github.com/owenliang/mcp-sse-python
+
+
+## (3)MCP HTTP Streamable Server 实现
+参考: https://www.bilibili.com/video/BV1P7VSzwEXL?spm_id_from=333.788.player.switch&vd_source=543b2dcf5d331a68c9841120068cfd8b&p=2
+文档:https://kq4b3vgg5b.feishu.cn/wiki/L6vHwIDCyi8FSmk9tThc7qB5nxf
