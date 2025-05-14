@@ -85,5 +85,9 @@ python -m twine upload dist/*
 # View at: https://pypi.org/project/mcp-http-streamable-ysx-test/0.1.0/
 ```
 
+### 下载运行
+- pip install mcp-http-streamable-ysx-test
+- 开启服务：uv run mcp-http-streamable-ysx-test --port 3002 --api-key YOUR_API_KEY
+- 使用Inspector连接测试
 
 
