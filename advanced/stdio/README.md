@@ -1,3 +1,8 @@
+## 安装环境依赖
+- pip install --upgrade mcp(需要>=1.8.0)                                                  
+- pip install requests==2.32.3                          
+- pip install mysql-connector-python==9.3.0
+
 ## 配置.env
 - 将env.template修改为.env
 
