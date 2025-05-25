@@ -39,12 +39,12 @@ def get_db_config():
 
 
 # 实例化Server
-mcp = Server("mysql_mcp_server")
+mcp_server = Server("mysql_mcp_server")
 
 
 # 声明 list_resources 函数为一个资源列表接口
 # 列出 MySQL 数据库中的表并将其作为资源返回
-@mcp.list_resources()
+@mcp_server.list_resources()
 async def list_resources() -> list[Resource]:
     # 获取数据库配置
     config = get_db_config()
@@ -90,7 +90,7 @@ async def list_resources() -> list[Resource]:
 # 声明 read_resource 函数为一个读取资源的接口
 # 根据传入的 URI 读取表的内容
 # uri: 表示资源的 URI，类型为 AnyUrl，确保输入是一个合法的 URL
-@mcp.read_resource()
+@mcp_server.read_resource()
 async def read_resource(uri: AnyUrl) -> str:
     # 获取数据库配置
     config = get_db_config()
@@ -140,7 +140,7 @@ async def read_resource(uri: AnyUrl) -> str:
 
 # 声明 list_tools 函数为一个列出工具的接口
 # 列出可用的 MySQL 工具
-@mcp.list_tools()
+@mcp_server.list_tools()
 async def list_tools() -> list[Tool]:
     logger.info("Listing tools...")
     # 函数返回一个列表，其中包含一个 Tool 对象
@@ -174,7 +174,7 @@ async def list_tools() -> list[Tool]:
 # 根据传入的工具名称和参数执行相应的 SQL 命令
 # name: 工具的名称（字符串），指定要调用的工具
 # arguments: 一个字典，包含工具所需的参数
-@mcp.call_tool()
+@mcp_server.call_tool()
 async def call_tool(name: str, arguments: dict) -> list[TextContent]:
     # 获取数据库配置
     config = get_db_config()
@@ -237,4 +237,4 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
 
 if __name__ == "__main__":
     # Initialize and run the server
-    mcp.run(transport="sse")
+    mcp_server.run(transport="sse")

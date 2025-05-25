@@ -1,6 +1,6 @@
 import uvicorn
 import os
-from sse_server import mcp
+from mysql_server import mcp
 from dotenv import load_dotenv
 import contextlib
 from mcp.server.streamable_http_manager import StreamableHTTPSessionManager

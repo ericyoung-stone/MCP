@@ -49,7 +49,7 @@ where = ["src"]
 # 回到项目主目录
 # cd /root/autodl-tmp/MCP/mcp-weather-http
 
-uv run ./src/mcp_weather_http/server.py --port 3001 --api-key YOUR_KEY
+uv run ./src/mcp_weather_http/mysql_server.py --port 3001 --api-key YOUR_KEY
 ```
 ### 开启Inspector
 ```bash
