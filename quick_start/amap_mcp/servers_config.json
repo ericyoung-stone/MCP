@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "amap": {
+      "url": "http://0.0.0.0:9999/mcp"
+    }
+  }
+}
