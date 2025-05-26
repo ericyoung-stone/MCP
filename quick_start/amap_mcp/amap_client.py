@@ -374,11 +374,26 @@ class ChatSession:
             except Exception as e:
                 logging.warning(f"Warning during final cleanup: {e}")
 
+    def convert_llm_response_to_json_str(self, llm_response: str) -> str:
+        import json
+        import re
+        # 方法 1：strip()
+        json_str = llm_response.strip('```json').strip('```').strip()
+
+        # 方法 2：正则表达式
+        # json_str = re.sub(r'^```json|```$', '', s, flags=re.MULTILINE).strip()
+
+        return json_str
+
     # 负责处理从 LLM 返回的响应，并在需要时执行工具
     async def process_llm_response(self, llm_response: str) -> str:
         try:
             # 尝试将 LLM 响应解析为 JSON ，以便检查是否包含 tool 和 arguments 字段
-            llm_call = json.loads(llm_response)
+            if llm_response.startswith('```json'):
+                json_str = self.convert_llm_response_to_json_str(llm_response)
+                llm_call = json.loads(json_str)
+            else:
+                llm_call = json.loads(llm_response)
 
             # 1、如果响应包含工具名称和参数，执行相应工具
             if "tool" in llm_call and "arguments" in llm_call:
@@ -513,6 +528,7 @@ class ChatSession:
                             3. Focus on the most relevant information
                             4. Use appropriate context from the user's question
                             5. Avoid simply repeating the raw data
+                            6. json格式的输出,只返回json的字符串,不需要带'```json```
 
                             Please use only the resources or tools that are explicitly defined above."""
 
